@@ -7,7 +7,7 @@ function FormStepItem({ active, done, children }) {
 }
 
 function FormNavBar({ currentStep }) {
-  return (
+  return currentStep <= 3 ? (
     <Styled.FormNavBar>
       <Container>
         <Flex alignItems="center">
@@ -23,9 +23,8 @@ function FormNavBar({ currentStep }) {
 
         </Flex>
       </Container>
-
     </Styled.FormNavBar>
-  );
+  ) : null;
 }
 
 export default FormNavBar;

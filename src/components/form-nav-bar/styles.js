@@ -20,5 +20,4 @@ line-height: ${itemHeight}px;
 text-align:center;
 font-weight: 500;
 color: white;
-
 `;

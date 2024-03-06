@@ -4,10 +4,13 @@ import Container from '../../layout/container';
 import Flex from '../../layout/flex';
 import Button from '../button';
 import Input from '../input';
+import Figure from '../figure';
 import * as Styled from './styles';
+import Message from '../message';
+import Katie from '../../assets/katie.png';
 
 function FormContent({
-  currentStep, updateUserData, userData, confirmForm, backToPreviousStep,
+  currentStep, updateUserData, userData, confirmForm, backToPreviousStep, backToStep1,
 }) {
   const [localData, setLocalData] = useState(userData);
 
@@ -68,30 +71,38 @@ function FormContent({
             />
             <Button onClick={submitForm} id="form-step-2-next">Next</Button>
           </Flex>
-        ) : (
-          currentStep === 3 && (
-            <Flex flexDirection="column" id="confirmation-page">
-              <Styled.FormHeading>Confirmation</Styled.FormHeading>
-              <Flex flexDirection="column" justifyContent="flex-start">
-                <Styled.LineParagraph id="confirmation-name">
-                  <span>Name</span>
-                  :
-                  <strong>{localData.name}</strong>
-                </Styled.LineParagraph>
-                <Styled.LineParagraph id="confirmation-income">
-                  <span>Income</span>
-                  :
-                  <strong>{localData.income}</strong>
-                </Styled.LineParagraph>
-                <Styled.LineParagraph id="confirmation-education">
-                  <span>Education</span>
-                  :
-                  <strong>{localData.education}</strong>
-                </Styled.LineParagraph>
-              </Flex>
-              <Button onClick={backToPreviousStep} invert id="form-confirmation-back-button">Back</Button>
-              <Button onClick={confirmForm} id="form-confirmation-button">Confirm</Button>
+        ) : currentStep === 3 ? (
+          <Flex flexDirection="column" id="confirmation-page">
+            <Styled.FormHeading>Confirmation</Styled.FormHeading>
+            <Flex flexDirection="column" justifyContent="flex-start">
+              <Styled.LineParagraph id="confirmation-name">
+                <span>Name</span>
+                :
+                <strong>{localData.name}</strong>
+              </Styled.LineParagraph>
+              <Styled.LineParagraph id="confirmation-income">
+                <span>Income</span>
+                :
+                <strong>{localData.income}</strong>
+              </Styled.LineParagraph>
+              <Styled.LineParagraph id="confirmation-education">
+                <span>Education</span>
+                :
+                <strong>{localData.education}</strong>
+              </Styled.LineParagraph>
             </Flex>
+            <Button onClick={backToPreviousStep} invert id="form-confirmation-back-button">Back</Button>
+            <Button onClick={confirmForm} id="form-confirmation-button">Confirm</Button>
+          </Flex>
+        ) : (
+          currentStep === 4 && (
+          <Flex gap="30px" flexDirection="column" id="thank-you-page" justifyContent="center">
+            <Flex justifyContent="flex-start">
+              <Figure src={Katie} alt="" />
+              <Message text={`Hi ${userData.name}, thank you for submitting the form. We will check and get back to you in 2 business days.`} />
+            </Flex>
+            <Button onClick={backToStep1} id="submit-another-button">Submit Another</Button>
+          </Flex>
           )
         )}
       </Styled.FormContentDiv>
